@@ -1,6 +1,11 @@
 package com.galvanize.herobook.model;
 
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode
 public class HeroDTO {
-    public HeroDTO(String batman) {
+    String name;
+    public HeroDTO(String name) {
+        this.name=name;
     }
 }
