@@ -11,6 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -21,6 +22,17 @@ public class HeroesServiceTest {
 
     @InjectMocks
     private HeroesService subject;
+
+    @Test
+    public void create(){
+        HeroDTO HeroDTO = new HeroDTO("Batman","","Amir",155,60,"FIT",
+                "80","Y","80","70","30","ARTIST","COMEDY");
+        subject.create(HeroDTO);
+        verify(mockHeroesRepository).save(
+                new HeroEntity("Batman","","Amir",155,60,"FIT",
+                        "80","Y","80","70","30","ARTIST","COMEDY")
+        );
+    }
 
     @Test
     public void fetchAll(){

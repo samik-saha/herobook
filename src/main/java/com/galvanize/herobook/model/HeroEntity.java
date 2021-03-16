@@ -32,6 +32,8 @@ public class HeroEntity {
     String description;
     String story;
 
+    HeroEntity(){}
+
     public HeroEntity(String heroName, String imagePath, String realName, float height, float weight, String specialPower, String intelligence, String strength, String power, String speed, String agility, String description, String story) {
         this.heroName = heroName;
         this.imagePath = imagePath;
