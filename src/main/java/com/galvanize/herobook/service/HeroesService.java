@@ -22,10 +22,17 @@ public class HeroesService {
         return heroesRepository.findAll()
                 .stream()
                 .map(heroEntity -> {
-                    return new HeroDTO(heroEntity.getName());
+                    return new HeroDTO(heroEntity.getHeroName(),heroEntity.getImagePath(),heroEntity.getRealName(),
+                            heroEntity.getHeight(),heroEntity.getWeight(),heroEntity.getSpecialPower(),heroEntity.getIntelligence(),
+                            heroEntity.getStrength(),heroEntity.getPower(), heroEntity.getSpeed(), heroEntity.getAgility(),
+                            heroEntity.getDescription(),heroEntity.getStory());
                 })
                 .collect(Collectors.toList());
     }
+
+    //String heroName,String imagePath,String realName,float height,float weight,String specialPower,
+    //  // String intelligence,String strength,String power,String speed,String agility,
+    //  String description,String story
 
     public HeroDTO fetchwithname(String name) {
 
@@ -33,9 +40,13 @@ public class HeroesService {
         return heroesRepository.findAll()
                 .stream()
                 .filter(heroEntity ->
-                   heroEntity.getName() == name
+                   heroEntity.getHeroName() == name
     ).map(heroEntity -> {
-                    return new HeroDTO(heroEntity.getName());
+                    return new HeroDTO(heroEntity.getHeroName(),heroEntity.getImagePath(),heroEntity.getRealName(),
+                    heroEntity.getHeight(),heroEntity.getWeight(),heroEntity.getSpecialPower(),heroEntity.getIntelligence(),
+                    heroEntity.getStrength(),heroEntity.getPower(), heroEntity.getSpeed(), heroEntity.getAgility(),
+                            heroEntity.getDescription(),heroEntity.getStory()
+                    );
                 })
                 .collect(Collectors.toList()).stream().findFirst().orElse(null);
 

@@ -26,11 +26,18 @@ public class HeroesServiceTest {
     public void fetchAll(){
         //Setup
         //AnimalEntity animalEntity = new AnimalEntity("Tiger", "walking", "unhappy");
+
+        //String heroName,String imagePath,String realName,float height,float weight,String specialPower,
+        //  // String intelligence,String strength,String power,String speed,String agility,
+        //  String description,String story
         when(mockHeroesRepository.findAll()).thenReturn(
                 List.of(
-                        new HeroEntity("Batman"),
-                        new HeroEntity("Superman")
-                )
+                        new HeroEntity("Batman","","Amir",155,60,"FIT",
+                                "80","Y","80","70","30","ARTIST","COMEDY"),
+                        new HeroEntity("Superman","","Akshay",175,50,"FAT",
+                "90","N","80","70","60","GOOD ARTIST","ACTION"))
+
+
         );
 
         //Exercise
@@ -39,8 +46,10 @@ public class HeroesServiceTest {
         //Assert
         assertThat(actual).isEqualTo(
                 List.of(
-                        new HeroDTO("Batman"),
-                        new HeroDTO("Superman")
+                        new HeroDTO("Batman","","Amir",155,60,"FIT",
+                                "80","Y","80","70","30","ARTIST","COMEDY"),
+                        new HeroDTO("Superman","","Akshay",175,50,"FAT",
+                                "90","N","80","70","60","GOOD ARTIST","ACTION")
                 )
         );
     }
@@ -51,18 +60,22 @@ public class HeroesServiceTest {
         //AnimalEntity animalEntity = new AnimalEntity("Tiger", "walking", "unhappy");
         when(mockHeroesRepository.findAll()).thenReturn(
                 List.of(
-                        new HeroEntity("Batman"),
-                        new HeroEntity("Superman")
-                )
+                        new HeroEntity("Batman","","Amir",155,60,"FIT",
+                                "80","Y","80","70","30","ARTIST","COMEDY"),
+                        new HeroEntity("Superman","","Akshay",175,50,"FAT",
+                                "90","N","80","70","60","GOOD ARTIST","ACTION"))
+
+
         );
 
         //Exercise
-        HeroDTO actual = subject.fetchwithname("Batman");
+        HeroDTO actual = subject.fetchwithname("Superman");
 
         //Assert
         assertThat(actual).isEqualTo(
                 (
-                        new HeroDTO("Batman")
+                        new HeroDTO("Superman","","Akshay",175,50,"FAT",
+                                "90","N","80","70","60","GOOD ARTIST","ACTION")
                        // new HeroDTO("Superman")
                 )
         );
