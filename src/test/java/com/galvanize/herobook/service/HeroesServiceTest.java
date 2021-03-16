@@ -44,4 +44,27 @@ public class HeroesServiceTest {
                 )
         );
     }
+
+    @Test
+    public void fetchwithname(){
+        //Setup
+        //AnimalEntity animalEntity = new AnimalEntity("Tiger", "walking", "unhappy");
+        when(mockHeroesRepository.findAll()).thenReturn(
+                List.of(
+                        new HeroEntity("Batman"),
+                        new HeroEntity("Superman")
+                )
+        );
+
+        //Exercise
+        HeroDTO actual = subject.fetchwithname("Batman");
+
+        //Assert
+        assertThat(actual).isEqualTo(
+                (
+                        new HeroDTO("Batman")
+                       // new HeroDTO("Superman")
+                )
+        );
+    }
 }

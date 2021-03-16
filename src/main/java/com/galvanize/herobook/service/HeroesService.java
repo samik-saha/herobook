@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
+
 @Service
 public class HeroesService {
     private final HeroesRepository heroesRepository;
@@ -23,5 +25,21 @@ public class HeroesService {
                     return new HeroDTO(heroEntity.getName());
                 })
                 .collect(Collectors.toList());
+    }
+
+    public HeroDTO fetchwithname(String name) {
+
+        String name1 = name;
+        return heroesRepository.findAll()
+                .stream()
+                .filter(heroEntity ->
+                   heroEntity.getName() == name
+    ).map(heroEntity -> {
+                    return new HeroDTO(heroEntity.getName());
+                })
+                .collect(Collectors.toList()).stream().findFirst().orElse(null);
+
+
+
     }
 }
