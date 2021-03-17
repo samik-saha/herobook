@@ -1,9 +1,6 @@
 package com.galvanize.herobook.model;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +11,7 @@ import javax.persistence.Id;
 @Getter
 @Setter
 @EqualsAndHashCode
+@NoArgsConstructor
 public class HeroEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,8 +29,6 @@ public class HeroEntity {
     String agility;
     String description;
     String story;
-
-    HeroEntity(){}
 
     public HeroEntity(String heroName, String imagePath, String realName, float height, float weight, String specialPower, String intelligence, String strength, String power, String speed, String agility, String description, String story) {
         this.heroName = heroName;
