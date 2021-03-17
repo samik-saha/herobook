@@ -4,6 +4,7 @@ package com.galvanize.herobook.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.galvanize.herobook.model.HeroDTO;
 import com.galvanize.herobook.model.PersonaDTO;
+import com.galvanize.herobook.model.VillainDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -32,14 +33,29 @@ public class HeroBookIT
         HeroDTO heroDTO = new HeroDTO("Batman","","Amir",155,60,"FIT",
                 "80","Y","80","70","30","ARTIST","COMEDY");
 
-        mockmvc.perform(post("/herobook")
+        mockmvc.perform(post("/herobook/hero")
                 .content(objectMapper.writeValueAsString(heroDTO))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated());
 
-        mockmvc.perform(get("/herobook")).andExpect(status().isOk())
+        mockmvc.perform(get("/herobook/hero")).andExpect(status().isOk())
                 .andExpect(jsonPath("[0].heroName").value("Batman"))
                 .andExpect(jsonPath("[0].realName").value("Amir"));
+    }
+
+    @Test
+    public void postVillain() throws Exception {
+        VillainDTO villainDTO = new VillainDTO("xyz","","Villain2","vv2",155,60,"FIT",
+                "80","Y","80","70","30","ARTIST","COMEDY");
+
+        mockmvc.perform(post("/herobook/villain")
+                .content(objectMapper.writeValueAsString(villainDTO))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated());
+
+        mockmvc.perform(get("/herobook/villain")).andExpect(status().isOk())
+                .andExpect(jsonPath("[0].heroName").value("vv2"))
+                .andExpect(jsonPath("[0].realName").value("Villain2"));
     }
 
     @Test
