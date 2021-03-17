@@ -3,7 +3,7 @@ package com.galvanize.herobook.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.galvanize.herobook.model.HeroDTO;
-import com.galvanize.herobook.model.VisitorDTO;
+import com.galvanize.herobook.model.PersonaDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -44,7 +44,7 @@ public class HeroBookIT
 
     @Test
     public void postVisitor() throws Exception{
-        VisitorDTO visitorDTO=new VisitorDTO("Sunita");
+        PersonaDTO visitorDTO=new PersonaDTO("Sunita","Visitor");
         mockmvc.perform(post("/visitor")
                 .content(objectMapper.writeValueAsString(visitorDTO))
                 .contentType(MediaType.APPLICATION_JSON))

@@ -1,9 +1,7 @@
 package com.galvanize.herobook.service;
 
-import com.galvanize.herobook.model.HeroDTO;
-import com.galvanize.herobook.model.VisitorDTO;
-import com.galvanize.herobook.model.HeroEntity;
-import com.galvanize.herobook.model.VisitorEntity;
+import com.galvanize.herobook.model.PersonaDTO;
+import com.galvanize.herobook.model.PersonaEntity;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,19 +15,19 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class VisitorServiceTest {
+public class PersonaServiceTest {
     @Mock
-    VisitorRepository mockVisitorRepository;
+    PersonaRepository mockVisitorRepository;
 
     @InjectMocks
-    private VisitorService subject;
+    private PersonaService subject;
 
     @Test
     public void create(){
-        VisitorDTO visitorDTO = new VisitorDTO("Sunita");
+        PersonaDTO visitorDTO = new PersonaDTO("Sunita","Visitor");
         subject.create(visitorDTO);
         verify(mockVisitorRepository).save(
-                new VisitorEntity("Sunita")
+                new PersonaEntity("Sunita","Visitor")
         );
     }
 
@@ -37,19 +35,19 @@ public class VisitorServiceTest {
     public void fetchVisitor(){
         when(mockVisitorRepository.findAll()).thenReturn(
                 List.of(
-                        new VisitorEntity("Samik"),
-                        new VisitorEntity("Sunita"))
+                        new PersonaEntity("Samik","Fan"),
+                        new PersonaEntity("Sunita","Visitor"))
 
 
         );
 
         //Exercise
-        VisitorDTO actual = subject.fetchVisitor("Sunita");
+        PersonaDTO actual = subject.fetchVisitor("Sunita");
 
         //Assert
         assertThat(actual).isEqualTo(
                 (
-                        new VisitorDTO("Sunita")
+                        new PersonaDTO("Sunita","Visitor")
                 )
         );
     }

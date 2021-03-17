@@ -1,9 +1,9 @@
 package com.galvanize.herobook.controller;
 
 import com.galvanize.herobook.model.HeroDTO;
-import com.galvanize.herobook.model.VisitorDTO;
+import com.galvanize.herobook.model.PersonaDTO;
 import com.galvanize.herobook.service.HeroesService;
-import com.galvanize.herobook.service.VisitorService;
+import com.galvanize.herobook.service.PersonaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,9 +12,9 @@ import java.util.List;
 @RestController
 public class HeroBookController {
     HeroesService heroesService;
-    VisitorService visitorService;
+    PersonaService visitorService;
 
-    public HeroBookController(HeroesService heroesService, VisitorService visitorService){
+    public HeroBookController(HeroesService heroesService, PersonaService visitorService){
         this.heroesService=heroesService;
         this.visitorService=visitorService;
     }
@@ -34,7 +34,7 @@ public class HeroBookController {
 
     @PostMapping("/visitor")
     @ResponseStatus(HttpStatus.CREATED)
-    public void postHero(@RequestBody VisitorDTO visitorDTO){
+    public void postHero(@RequestBody PersonaDTO visitorDTO){
         visitorService.create(visitorDTO);
     }
 }

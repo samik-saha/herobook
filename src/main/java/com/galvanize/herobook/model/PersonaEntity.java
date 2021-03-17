@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class VisitorEntity {
+public class PersonaEntity {
     String name;
+    String role;
 }
