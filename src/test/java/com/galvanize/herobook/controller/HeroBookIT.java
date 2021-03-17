@@ -3,6 +3,7 @@ package com.galvanize.herobook.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.galvanize.herobook.model.HeroDTO;
+import com.galvanize.herobook.model.VisitorDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -39,6 +40,16 @@ public class HeroBookIT
         mockmvc.perform(get("/herobook")).andExpect(status().isOk())
                 .andExpect(jsonPath("[0].heroName").value("Batman"))
                 .andExpect(jsonPath("[0].realName").value("Amir"));
+    }
+
+    @Test
+    public void postVisitor() throws Exception{
+        VisitorDTO visitorDTO=new VisitorDTO("Sunita");
+        mockmvc.perform(post("/visitor")
+                .content(objectMapper.writeValueAsString(visitorDTO))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated());
+
     }
 
 }
