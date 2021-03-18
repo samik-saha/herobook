@@ -57,11 +57,29 @@ public class HeroBookController {
         villainServices.create(villainDTO);
     }
 
-    @GetMapping("/villain")
+    @GetMapping("/villains")
     @ResponseStatus(HttpStatus.OK)
     public List<VillainDTO> getVillain() {
+            return villainServices.fetchAll();
+    }
 
-        return villainServices.fetchAll();
+    @GetMapping("/villain")
+    @ResponseStatus(HttpStatus.OK)
+    public VillainDTO getVillain(@RequestParam String name, @RequestParam String persona) {
+
+        PersonaDTO personaDTO = personaService.fetchPersona(persona);
+        if (personaDTO!=null && personaDTO.getRole().equals("Visitor")){
+            VillainDTO villainDTO = villainServices.fetchwithname(name);
+            System.out.println(villainDTO);
+            if (villainDTO != null){
+                return  villainDTO;
+            }else{
+                return null;
+            }
+        }
+        else{
+            return null;
+        }
     }
 
 

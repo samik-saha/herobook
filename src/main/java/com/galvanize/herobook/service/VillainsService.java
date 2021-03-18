@@ -41,7 +41,7 @@ public class VillainsService {
         return villainsRepository.findAll()
                 .stream()
                 .filter(villainEntity ->
-                        villainEntity.getHeroName() == name
+                        villainEntity.getHeroName().equals(name)
                 ).map(villainEntity -> {
                     return new VillainDTO(villainEntity.getArchRival(), villainEntity.getImagePath(),villainEntity.getRealName(),villainEntity.getHeroName(),
                             villainEntity.getHeight(), villainEntity.getWeight(), villainEntity.getSpecialPower(), villainEntity.getIntelligence(),
