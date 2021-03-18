@@ -31,9 +31,18 @@ public class HeroBookController {
         heroesService.create(heroDTO);
     }
 
+//    @GetMapping("/hero")
+//    @ResponseStatus(HttpStatus.OK)
+//    public List<HeroDTO> getHero() {
+//
+//        return heroesService.fetchAll();
+//    }
+
     @GetMapping("/hero")
     @ResponseStatus(HttpStatus.OK)
-    public List<HeroDTO> getHero() {
+    public List<HeroDTO> getHero(@RequestParam String persona) {
+
+
 
         return heroesService.fetchAll();
     }

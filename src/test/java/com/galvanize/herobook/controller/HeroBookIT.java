@@ -44,6 +44,31 @@ public class HeroBookIT
     }
 
     @Test
+    public void getHero() throws Exception {
+        PersonaDTO visitorDTO=new PersonaDTO("Sunita","Visitor");
+        HeroDTO heroDTO = new HeroDTO("Batman","","Amir",155,60,"FIT",
+                "80","Y","80","70","30","ARTIST","COMEDY");
+
+        mockmvc.perform(post("/herobook/hero")
+                .content(objectMapper.writeValueAsString(heroDTO))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated());
+
+        mockmvc.perform(post("/herobook/visitor")
+                .content(objectMapper.writeValueAsString(visitorDTO))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated());
+
+        mockmvc.perform(get("/herobook/hero?persona=Sunita")).andExpect(status().isOk())
+                .andExpect(jsonPath("[0].heroName").value("Batman"))
+                .andExpect(jsonPath("[0].realName").value("Amir"));
+
+        mockmvc.perform(get("/herobook/hero?persona=Samik")).andExpect(status().isOk())
+                .andExpect(jsonPath("length()").value("0"));
+
+    }
+
+    @Test
     public void postVillain() throws Exception {
         VillainDTO villainDTO = new VillainDTO("xyz","","Villain2","vv2",155,60,"FIT",
                 "80","Y","80","70","30","ARTIST","COMEDY");
