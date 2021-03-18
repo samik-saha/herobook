@@ -9,19 +9,20 @@ import com.galvanize.herobook.service.VillainsService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/herobook")
 public class HeroBookController {
     HeroesService heroesService;
-    PersonaService visitorService;
+    PersonaService personaService;
     VillainsService villainServices;
 
 
-    public HeroBookController(HeroesService heroesService, PersonaService visitorService,VillainsService villainService){
+    public HeroBookController(HeroesService heroesService, PersonaService personaService, VillainsService villainService){
         this.heroesService=heroesService;
-        this.visitorService=visitorService;
+        this.personaService = personaService;
         this.villainServices=villainService;
     }
 
@@ -41,10 +42,13 @@ public class HeroBookController {
     @GetMapping("/hero")
     @ResponseStatus(HttpStatus.OK)
     public List<HeroDTO> getHero(@RequestParam String persona) {
-
-
-
-        return heroesService.fetchAll();
+        PersonaDTO personaDTO = personaService.fetchPersona(persona);
+        if (personaDTO!=null && personaDTO.getRole().equals("Visitor")){
+            return heroesService.fetchAll();
+        }
+        else{
+            return new ArrayList<>();
+        }
     }
 
     @PostMapping("/villain")
@@ -65,6 +69,6 @@ public class HeroBookController {
     @PostMapping("/visitor")
     @ResponseStatus(HttpStatus.CREATED)
     public void postHero(@RequestBody PersonaDTO visitorDTO){
-        visitorService.create(visitorDTO);
+        personaService.create(visitorDTO);
     }
 }

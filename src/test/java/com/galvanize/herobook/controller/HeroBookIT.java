@@ -38,9 +38,9 @@ public class HeroBookIT
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated());
 
-        mockmvc.perform(get("/herobook/hero")).andExpect(status().isOk())
-                .andExpect(jsonPath("[0].heroName").value("Batman"))
-                .andExpect(jsonPath("[0].realName").value("Amir"));
+//        mockmvc.perform(get("/herobook/hero")).andExpect(status().isOk())
+//                .andExpect(jsonPath("[0].heroName").value("Batman"))
+//                .andExpect(jsonPath("[0].realName").value("Amir"));
     }
 
     @Test
@@ -84,9 +84,35 @@ public class HeroBookIT
     }
 
     @Test
+    public void getVillainByName() throws Exception {
+        PersonaDTO visitorDTO=new PersonaDTO("Sunita","Visitor");
+
+        VillainDTO villainDTO = new VillainDTO("xyz","","Villain2","vv2",155,60,"FIT",
+                "80","Y","80","70","30","ARTIST","COMEDY");
+
+        mockmvc.perform(post("/herobook/villain")
+                .content(objectMapper.writeValueAsString(villainDTO))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated());
+
+        mockmvc.perform(post("/herobook/visitor")
+                .content(objectMapper.writeValueAsString(visitorDTO))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated());
+
+        mockmvc.perform(get("/herobook/villain?name=vv2&persona=Sunita")).andExpect(status().isOk())
+                .andExpect(jsonPath("[0].heroName").value("vv2"))
+                .andExpect(jsonPath("[0].realName").value("Villain2"));
+
+        mockmvc.perform(get("/herobook/villain?name=vv3&persona=Sunita")).andExpect(status().isOk())
+                .andExpect(jsonPath(".error").value("Villain does not exist"));
+
+    }
+
+    @Test
     public void postVisitor() throws Exception{
         PersonaDTO visitorDTO=new PersonaDTO("Sunita","Visitor");
-        mockmvc.perform(post("/visitor")
+        mockmvc.perform(post("/herobook/visitor")
                 .content(objectMapper.writeValueAsString(visitorDTO))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated());

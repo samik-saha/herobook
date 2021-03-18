@@ -23,11 +23,11 @@ public class PersonaService {
         ));
     }
 
-    public PersonaDTO fetchVisitor(String name) {
+    public PersonaDTO fetchPersona(String name) {
         return this.visitorRepository.findAll()
                 .stream()
                 .filter(visitorEntity ->
-                        visitorEntity.getName() == name
+                        visitorEntity.getName().equals(name)
                 ).map(visitorEntity -> {
                     return new PersonaDTO(visitorEntity.getName(), visitorEntity.getRole());
                 })

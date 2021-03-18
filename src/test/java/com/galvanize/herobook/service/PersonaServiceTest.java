@@ -42,7 +42,7 @@ public class PersonaServiceTest {
         );
 
         //Exercise
-        PersonaDTO actual = subject.fetchVisitor("Sunita");
+        PersonaDTO actual = subject.fetchPersona("Sunita");
 
         //Assert
         assertThat(actual).isEqualTo(
