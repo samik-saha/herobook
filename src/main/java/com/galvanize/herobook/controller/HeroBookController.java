@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/herobook")
 public class HeroBookController {
     HeroesService heroesService;
     PersonaService visitorService;
@@ -24,26 +25,26 @@ public class HeroBookController {
         this.villainServices=villainService;
     }
 
-    @PostMapping("/herobook/hero")
+    @PostMapping("/hero")
     @ResponseStatus(HttpStatus.CREATED)
     public void postHero(@RequestBody HeroDTO heroDTO){
         heroesService.create(heroDTO);
     }
 
-    @GetMapping("/herobook/hero")
+    @GetMapping("/hero")
     @ResponseStatus(HttpStatus.OK)
     public List<HeroDTO> getHero() {
 
         return heroesService.fetchAll();
     }
 
-    @PostMapping("/herobook/villain")
+    @PostMapping("/villain")
     @ResponseStatus(HttpStatus.CREATED)
     public void postVillain(@RequestBody VillainDTO villainDTO){
         villainServices.create(villainDTO);
     }
 
-    @GetMapping("/herobook/villain")
+    @GetMapping("/villain")
     @ResponseStatus(HttpStatus.OK)
     public List<VillainDTO> getVillain() {
 
@@ -52,7 +53,7 @@ public class HeroBookController {
 
 
 
-    @PostMapping("/herobook/visitor")
+    @PostMapping("/visitor")
     @ResponseStatus(HttpStatus.CREATED)
     public void postHero(@RequestBody PersonaDTO visitorDTO){
         visitorService.create(visitorDTO);

@@ -12,7 +12,6 @@ public class PersonaService {
     private final PersonaRepository visitorRepository;
 
     @Autowired
-
     public PersonaService(PersonaRepository visitorRepository) {
         this.visitorRepository = visitorRepository;
     }
