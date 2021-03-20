@@ -30,17 +30,11 @@ public class HeroesService {
                 .collect(Collectors.toList());
     }
 
-    //String heroName,String imagePath,String realName,float height,float weight,String specialPower,
-    //  // String intelligence,String strength,String power,String speed,String agility,
-    //  String description,String story
-
-    public HeroDTO fetchwithname(String name) {
-
-        String name1 = name;
+    public HeroDTO findByName(String name) {
         return heroesRepository.findAll()
                 .stream()
                 .filter(heroEntity ->
-                        heroEntity.getHeroName() == name
+                        heroEntity.getHeroName().equals(name)
                 ).map(heroEntity -> {
                     return new HeroDTO(heroEntity.getHeroName(), heroEntity.getImagePath(), heroEntity.getRealName(),
                             heroEntity.getHeight(), heroEntity.getWeight(), heroEntity.getSpecialPower(), heroEntity.getIntelligence(),
@@ -49,8 +43,6 @@ public class HeroesService {
                     );
                 })
                 .collect(Collectors.toList()).stream().findFirst().orElse(null);
-
-
     }
 
     public void create(HeroDTO heroDTO) {

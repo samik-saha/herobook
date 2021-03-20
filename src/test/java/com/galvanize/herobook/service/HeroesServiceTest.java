@@ -67,9 +67,8 @@ public class HeroesServiceTest {
     }
 
     @Test
-    public void fetchwithname(){
+    public void findByName(){
         //Setup
-        //AnimalEntity animalEntity = new AnimalEntity("Tiger", "walking", "unhappy");
         when(mockHeroesRepository.findAll()).thenReturn(
                 List.of(
                         new HeroEntity("Batman","","Amir",155,60,"FIT",
@@ -81,14 +80,13 @@ public class HeroesServiceTest {
         );
 
         //Exercise
-        HeroDTO actual = subject.fetchwithname("Superman");
+        HeroDTO actual = subject.findByName("Superman");
 
         //Assert
         assertThat(actual).isEqualTo(
                 (
                         new HeroDTO("Superman","","Akshay",175,50,"FAT",
                                 "90","N","80","70","60","GOOD ARTIST","ACTION")
-                       // new HeroDTO("Superman")
                 )
         );
     }
